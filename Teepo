@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>For You ♡</title>
+
+<style>
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  overflow: hidden;
+  font-family: Arial, sans-serif;
+  background: #dff5df;
+  color: #285c3b;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.box {
+  text-align: center;
+  background: rgba(255,255,255,0.8);
+  padding: 40px 25px;
+  border-radius: 30px;
+  width: 90%;
+  max-width: 430px;
+  box-shadow: 0 10px 35px rgba(40,92,59,0.2);
+}
+
+h1 {
+  font-size: 30px;
+  margin-bottom: 30px;
+}
+
+button {
+  border: none;
+  border-radius: 15px;
+  padding: 14px 25px;
+  font-size: 20px;
+  margin: 8px;
+  cursor: pointer;
+}
+
+#yes {
+  background: #78c98a;
+  color: white;
+  transition: 0.3s;
+}
+
+#no {
+  background: white;
+  color: #285c3b;
+  position: relative;
+}
+
+.heart {
+  position: fixed;
+  bottom: -50px;
+  pointer-events: none;
+  animation: floatUp linear forwards;
+}
+
+@keyframes floatUp {
+  0% {
+    transform: translateY(0) rotate(0deg) scale(.8);
+    opacity: 0;
+  }
+
+  10% {
+    opacity: 1;
+  }
+
+  100% {
+    transform: translateY(-110vh) rotate(360deg) scale(1.5);
+    opacity: 0;
+  }
+}
+
+@keyframes appear {
+  from {
+    transform: scale(.5);
+    opacity: 0;
+  }
+
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<div class="box" id="mainBox">
+
+  <h1>Hey Little One,Will you marry me? 💍</h1>
+
+  <button id="yes">yes :></button>
+  <button id="no">no :(</button>
+
+</div>
+
+<script>
+
+const yes = document.getElementById("yes");
+const no = document.getElementById("no");
+
+let size = 20;
+
+no.addEventListener("click", function() {
+
+  const x = Math.random() * 220 - 110;
+  const y = Math.random() * 180 - 90;
+
+  no.style.transform =
+    `translate(${x}px, ${y}px)`;
+
+  size += 5;
+
+  yes.style.fontSize = size + "px";
+
+  yes.style.padding =
+    (14 + size / 8) + "px " +
+    (25 + size / 6) + "px";
+});
+
+
+yes.addEventListener("click", function() {
+
+  document.body.style.background =
+    "linear-gradient(135deg,#dff7df,#b9e8c2,#e8f9e8)";
+
+  document.body.innerHTML = `
+
+    <div class="box" style="
+      animation: appear 1s ease;
+      position:relative;
+      z-index:10;
+    ">
+
+      <h1>yay we are married ♡</h1>
+
+      <p style="font-size:20px;">
+        My Angel,I love you so💚
+      </p>
+
+    </div>
+
+  `;
+
+  setInterval(createHeart, 180);
+
+});
+
+
+function createHeart() {
+
+  const heart = document.createElement("div");
+
+  heart.className = "heart";
+
+  const symbols = ["💚","🤍","♡","💚","★"];
+
+  heart.innerHTML =
+    symbols[Math.floor(Math.random() * symbols.length)];
+
+  heart.style.left =
+    Math.random() * 100 + "vw";
+
+  heart.style.fontSize =
+    (18 + Math.random() * 30) + "px";
+
+  heart.style.animationDuration =
+    (3 + Math.random() * 4) + "s";
+
+  document.body.appendChild(heart);
+
+  setTimeout(function() {
+    heart.remove();
+  }, 7000);
+
+}
+
+</script>
+
+</body>
+</html>
